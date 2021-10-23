@@ -18,20 +18,24 @@
     components: {
       ThreadEditor
     },
+
     props: {
       id: {
         type: String,
         required: true
       }
     },
+
     computed: {
       thread () {
         return this.$store.state.threads[this.id]
       },
+
       text () {
         return this.$store.state.posts[this.thread.firstPostId].text
       }
     },
+
     methods: {
       save ({title, text}) {
         this.$store.dispatch('updateThread', {
@@ -39,15 +43,17 @@
           title,
           text
         }).then(thread => {
-          this.$router.push({name: 'ThreadShow', params: {id: thread['.key']}})
+          this.$router.push({name: 'ThreadShow', params: {id: this.id}})
         })
       },
+
       cancel () {
-        this.$router.push({name: 'Forum', params: {id: this.forum['.key']}})
+        this.$router.push({name: 'ThreadShow', params: {id: this.id}})
       }
     }
   }
 </script>
 
 <style scoped>
+
 </style>
