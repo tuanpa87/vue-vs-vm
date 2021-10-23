@@ -24,6 +24,7 @@
           @cancel="editing = false"
         />
       </div>
+
     </div>
 
     <div class="post-date text-faded">
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-    import {countObjectProperties} from '@/utils'
     import PostEditor from './PostEditor'
 
     export default {
@@ -61,7 +61,7 @@
         },
 
         userPostsCount () {
-          return countObjectProperties(this.user.posts)
+          return this.$store.getters.userPostsCount(this.post.userId)
         }
       }
     }
