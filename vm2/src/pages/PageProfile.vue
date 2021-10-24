@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grid">
+  <div v-if="forum" class="flex-grid">
     <UserProfileCard
       v-if="!edit"
       :user="user"
@@ -56,6 +56,10 @@
           }
           return []
         }
+      },
+
+      created () {
+        this.$store.dispatch('fetchForum', {id: this.forumId})
       }
     }
 </script>
