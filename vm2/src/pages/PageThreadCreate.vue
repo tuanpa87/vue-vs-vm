@@ -11,6 +11,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     import ThreadEditor from '@/components/ThreadEditor'
 
     export default {
@@ -32,6 +33,8 @@
       },
 
       methods: {
+        ...mapActions(['createThread', 'fetchForum']),
+
         save ({title, text}) {
           this.$store.dispatch('createThread', {
             forumId: this.forum['.key'],
@@ -48,7 +51,7 @@
       },
 
       created () {
-        this.$store.dispatch('fetchForum', {id: this.forumId})
+        this.fetchForum({id: this.forumId})
       }
     }
 </script>
