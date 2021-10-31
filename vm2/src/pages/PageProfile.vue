@@ -1,26 +1,27 @@
 <template>
-  <div v-if="forum" class="flex-grid">
-    <UserProfileCard
-      v-if="!edit"
-      :user="user"
-    />
-    <UserProfileCardEditor
-      v-else
-      :user="user"
-    />
+  <div class="flex-grid">
+    <h1>My Profile</h1>
+    <!--<UserProfileCard-->
+      <!--v-if="!edit"-->
+      <!--:user="user"-->
+    <!--/>-->
+    <!--<UserProfileCardEditor-->
+      <!--v-else-->
+      <!--:user="user"-->
+    <!--/>-->
 
-    <div class="col-7 push-top">
+    <!--<div class="col-7 push-top">-->
 
-      <div class="profile-header">
-        <span class="text-lead">
-            {{user.username}}'s recent activity
-        </span>
-        <a href="#">See only started threads?</a>
-      </div>
+      <!--<div class="profile-header">-->
+        <!--<span class="text-lead">-->
+            <!--{{user.username}}'s recent activity-->
+        <!--</span>-->
+        <!--<a href="#">See only started threads?</a>-->
+      <!--</div>-->
 
-      <hr>
-      <PostList :posts="userPosts"/>
-    </div>
+      <!--<hr>-->
+      <!--<PostList :posts="userPosts"/>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -29,6 +30,7 @@
     import UserProfileCard from '@/components/UserProfileCard'
     import UserProfileCardEditor from '@/components/UserProfileCardEditor'
     import {mapGetters} from 'vuex'
+    import store from '@/store'
 
     export default {
       components: {
@@ -57,9 +59,15 @@
           return []
         }
       },
-
+      beforeRouteEnter (to, from, next) {
+        if (store.state.authId) {
+          next()
+        } else {
+          next({name: 'Home'})
+        }
+      },
       created () {
-        this.$store.dispatch('fetchForum', {id: this.forumId})
+        this.$emit('ready')
       }
     }
 </script>
