@@ -13,13 +13,13 @@ Vue.config.productionTip = false
 
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyAI3xPaupi8hcdyiZFN9pP_z340Uzfy6DA',
-  authDomain: 'playground-fln8563.firebaseapp.com',
-  databaseURL: 'https://playground-fln8563-default-rtdb.firebaseio.com',
-  projectId: 'playground-fln8563',
-  storageBucket: 'playground-fln8563.appspot.com',
-  messagingSenderId: '693158375683',
-  appId: '1:693158375683:web:df0478bb4b135030d33936'
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_ID,
+  appId: process.env.FIREBASE_APP_ID
 }
 firebase.initializeApp(config)
 
